@@ -69,3 +69,79 @@ void display_board(const char board[9][9]) {
 }
 
 /* add your functions here */
+
+
+//Precondition: board is a 9x9 sudoku board (completed or otherwise) filled
+//with characters.
+//Postcondition: returns true if board is filled, false otherwise.
+//board needn't be logically valid.
+
+bool is_complete(const char board[9][9])
+{
+  for(int row = 0; row < 9; row++)
+    {
+      for(int column = 0; column < 9; column++)
+	{
+	  if((board[row][column] < '1' || board[row][column] > '9'))
+	    return false;
+	}
+    }
+
+  return true;
+}
+
+
+
+//Returns false if digit cannot be placed in position on board 
+//(logically or due to range).
+//Returns true if placing digit in position on board is valid, and updates
+//board with digit placed in position.
+bool make_move(const char* position, char digit, char board[9][9])
+{
+  if(position[0] < 'A' || position[0] > 'I' || position[1] < '1' || position[1] > '9')
+    return false;
+
+  int pos_char = static_cast<int>(position[0] - 65);
+  int pos_int = static_cast<int>(position[1] - 49);
+
+  for(int k = 0; k < 9; k++)
+    {
+      if(board[k][pos_int] == digit ||
+	 board[pos_char][k] == digit)
+	return false;
+    }
+
+  for(int j = 0; j < 3; j++)
+    for(int l = 0; l < 3; l++)
+      {
+	if(board[pos_char - (pos_char%3) + j][pos_int - (pos_int%3) + l] == digit)
+	  return false;
+      }
+
+  board[pos_char][pos_int] = digit;
+
+  return true;
+}
+
+bool save_board(const char* filename, const char board[9][9])
+{
+  ofstream out(filename);
+
+  if(!out)
+    return false;
+
+  int row;
+
+  for(row = 0; row < 9 && out; row++)
+    {
+      for(int column = 0; column < 9; column++)
+	out.put(board[row][column]);
+
+      out.put('\n');
+    }
+
+  out.close();
+ 
+  return ((row == 9) ? true : false);
+
+}

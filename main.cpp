@@ -41,12 +41,42 @@ int main() {
   if (!make_move("I8", '1', board)) 
     cout << "NOT ";
   cout << "a valid move. The board is:" << endl;
+  //  display_board(board);
+
+
+  cout << "Putting '1' into I8 is ";
+  if (!make_move("J8", '1', board)) 
+    cout << "NOT ";
+  cout << "a valid move. The board is:not" << endl;
   display_board(board);
 
+  cout << "Putting '1' into A9 is ";
+  if (!make_move("A9", '1', board)) 
+    cout << "NOT ";
+  cout << "a valid move. The board is:not" << endl;
+  //  display_board(board);
+
+  cout << "Putting '1' into C5 is ";
+  if (!make_move("C5", '1', board)) 
+    cout << "NOT ";
+  cout << "a valid move. The board is:not" << endl;
+  //  display_board(board);
+
+  cout << "Putting '1' into I7 is ";
+  if (!make_move("I7", '1', board)) 
+    cout << "NOT ";
+  cout << "a valid move. The board is:not" << endl;
+  //  display_board(board);
+
+  cout << "Putting '1' into F2 is ";
+  if (!make_move("F2", '1', board)) 
+    cout << "NOT ";
+  cout << "a valid move. The board is:not" << endl;
+  //  display_board(board);
 	// write more tests
 
   cout << "====================== Question 3 ======================" << endl << endl;
-
+  
   load_board("easy.dat", board);
   if (save_board("easy-copy.dat", board))
     cout << "Save board to 'easy-copy.dat' successful." << endl;
@@ -55,7 +85,7 @@ int main() {
   cout << endl;
 
   cout << "====================== Question 4 ======================" << endl << endl;
-
+  /*
   load_board("easy.dat", board);
   if (solve_board(board)) {
     cout << "The 'easy' board has a solution:" << endl;
@@ -77,6 +107,6 @@ int main() {
   cout << "====================== Question 5 ======================" << endl << endl;
 
 	// write more tests
-
+	*/
   return 0;
 }
