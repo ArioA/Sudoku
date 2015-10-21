@@ -71,8 +71,8 @@ void display_board(const char board[9][9]) {
 /* add your functions here */
 
 
-//Precondition: board is a 9x9 sudoku board (completed or otherwise) filled
-//with characters.
+//Precondition: board is a 9x9 sudoku board (complete or otherwise) filled
+//with characters, where '.' represents empty squares.
 //Postcondition: returns true if board is filled, false otherwise.
 //board needn't be logically valid.
 
@@ -104,6 +104,9 @@ bool make_move(const char* position, char digit, char board[9][9])
   int pos_char = static_cast<int>(position[0] - 65);
   int pos_int = static_cast<int>(position[1] - 49);
 
+  if(board[pos_char][pos_int] <= '9' && board[pos_char][pos_int] >= '1')
+    return false;
+
   for(int k = 0; k < 9; k++)
     {
       if(board[k][pos_int] == digit ||
@@ -122,6 +125,9 @@ bool make_move(const char* position, char digit, char board[9][9])
 
   return true;
 }
+
+//Saves the 9x9 character array board to a file named filename.
+//The file filename is then in 9x9 grid form.
 
 bool save_board(const char* filename, const char board[9][9])
 {
@@ -144,4 +150,54 @@ bool save_board(const char* filename, const char board[9][9])
  
   return ((row == 9) ? true : false);
 
+}
+
+/*
+Precondition: board is an incomplete sudoku board, where the '.' character
+represents empty squares. 
+Returns 1 if board is solvable and a solution to board is found. In this
+ case, board is upadated to its solution.
+Returns 0 if board is impossible to solve and solution has not been found.
+In this case, board is left in its original state.
+*/ 
+
+bool solve_board(char board[9][9])
+{
+  if(is_complete(board))
+    {
+      return 1;
+    }
+
+  char digit, position[2];
+  int pos_char, pos_int;
+
+  for(char k = 'A'; k <= 'I'; k++)
+    {
+      position[0] = k;
+      pos_char = static_cast<int>(position[0]) - 65;
+
+      for(char j = '1'; j <= '9'; j++)
+	{
+	  position[1] = j;
+          pos_int = static_cast<int>(position[1]) - 49;
+
+	  for(digit = '1'; digit <= '9'; digit++)
+	    {
+	      if(make_move(position, digit, board))
+		{
+		  solve_board(board);
+
+		  if(is_complete(board))
+		    return 1;
+		  else
+		  board[pos_char][pos_int] = '.';
+		}
+	    }
+	
+	  if(board[pos_char][pos_int] == '.')
+	    return 0;
+	}
+    }
+
+  return 0;
 }

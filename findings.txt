@@ -1,1 +1,26 @@
 Summarise your findings here (see specification).
+
+I found that mystery1.dat contains the "extremely hard" board,
+mystery2.dat contains the impossible to solve board and mystery3.dat
+contains the "hard" board.
+
+I believe that mystery1.dat contains the "extremely hard" board
+because  when I ran my executable file, I found that there was a
+slight pause after the program had successfully loaded the mystery1.dat
+file. To me, this indicates that the computer is having to explore
+more possible combinations of valid moves, before finding the correct
+solution. Hence, the board is more computationally demanding and
+therefore can be deemed to be more difficult than any of the other
+puzzles which were completed much more quickly.
+
+I believe that mystery2.dat contains the impossible board because my
+function solve_board(board) returns false when I load mystery2.dat into
+board. Furthermore, after solve_board is finished with board, and I
+make a call to board with display_board, the printed board is the
+orignial mystery2.dat board. This implies that the is_complete flag
+was not triggered and all searches ended in incorrect outcomes.
+
+Finally, mystery3.dat contains the "hard" puzzle because the program
+took (noticeably) less time to find a solution than for
+mystery1.dat. So, by elimination, and reasons explained in the
+second paragraph, I believe that mystery3.dat contains the "hard" puzzle.
