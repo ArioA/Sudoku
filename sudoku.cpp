@@ -91,7 +91,8 @@ bool is_complete(const char board[9][9])
 }
 
 
-
+//Precondition: board is a 9x9 array of characters consisting of only
+// '.' or digits.
 //Returns false if digit cannot be placed in position on board 
 //(logically or due to range).
 //Returns true if placing digit in position on board is valid, and updates
@@ -99,29 +100,29 @@ bool is_complete(const char board[9][9])
 bool make_move(const char* position, char digit, char board[9][9])
 {
   if(position[0] < 'A' || position[0] > 'I' || position[1] < '1' || position[1] > '9')
-    return false;
+    return false; // Checks for invalid position.
 
   int pos_char = static_cast<int>(position[0] - 65);
   int pos_int = static_cast<int>(position[1] - 49);
 
   if(board[pos_char][pos_int] <= '9' && board[pos_char][pos_int] >= '1')
-    return false;
+    return false; //Checks if cell in question is occupied.
 
-  for(int k = 0; k < 9; k++)
-    {
+  for(int k = 0; k < 9; k++) //Checks both row and column                             
+    {                        //for same number as digit.
       if(board[k][pos_int] == digit ||
 	 board[pos_char][k] == digit)
 	return false;
     }
 
-  for(int j = 0; j < 3; j++)
-    for(int l = 0; l < 3; l++)
+  for(int j = 0; j < 3; j++)    //Checks that same number doesn't
+    for(int l = 0; l < 3; l++)  //occur in same 3x3 square.
       {
 	if(board[pos_char - (pos_char%3) + j][pos_int - (pos_int%3) + l] == digit)
 	  return false;
       }
 
-  board[pos_char][pos_int] = digit;
+  board[pos_char][pos_int] = digit; //Only reached if a valid move.
 
   return true;
 }
@@ -141,7 +142,7 @@ bool save_board(const char* filename, const char board[9][9])
   for(row = 0; row < 9 && out; row++)
     {
       for(int column = 0; column < 9; column++)
-	out.put(board[row][column]);
+	out.put(board[row][column]); //Outputs board row by row.
 
       out.put('\n');
     }
@@ -153,10 +154,10 @@ bool save_board(const char* filename, const char board[9][9])
 }
 
 /*
-Precondition: board is an incomplete sudoku board, where the '.' character
-represents empty squares. 
+Precondition: board is a (incomplete or otherwise) sudoku board, 
+where the '.' character represents empty squares. 
 Returns 1 if board is solvable and a solution to board is found. In this
- case, board is upadated to its solution.
+case, board is upadated to its solution.
 Returns 0 if board is impossible to solve and solution has not been found.
 In this case, board is left in its original state.
 */ 
@@ -171,14 +172,12 @@ bool solve_board(char board[9][9])
   char digit, position[2];
   int pos_char, pos_int;
 
-  for(char k = 'A'; k <= 'I'; k++)
+  for(position[0] = 'A'; k <= 'I'; k++)
     {
-      position[0] = k;
       pos_char = static_cast<int>(position[0]) - 65;
 
-      for(char j = '1'; j <= '9'; j++)
+      for(position[1] = '1'; j <= '9'; j++)
 	{
-	  position[1] = j;
           pos_int = static_cast<int>(position[1]) - 49;
 
 	  for(digit = '1'; digit <= '9'; digit++)
@@ -188,16 +187,16 @@ bool solve_board(char board[9][9])
 		  solve_board(board);
 
 		  if(is_complete(board))
-		    return 1;
+		    return 1; // Exits recursive loop if solution found.
 		  else
 		  board[pos_char][pos_int] = '.';
 		}
 	    }
 	
 	  if(board[pos_char][pos_int] == '.')
-	    return 0;
-	}
+	    return 0; // Tells function to give up and go
+	}             // back if all moves are impossible.
     }
 
-  return 0;
+  return 0; // Only reached if board is impossible to solve.
 }
