@@ -172,15 +172,19 @@ bool solve_board(char board[9][9])
   char digit, position[2];
   int pos_char, pos_int;
 
-  for(position[0] = 'A'; position[0] <= 'I'; position[0]++)
+  //Check through each row:
+
+  for(position[0] = 'A'; position[0] <= 'I'; position[0]++) 
     {
       pos_char = static_cast<int>(position[0]) - 65;
+
+      // Check through each collumn of each row:
 
       for(position[1] = '1'; position[1] <= '9'; position[1]++)
 	{
           pos_int = static_cast<int>(position[1]) - 49;
 
-	  for(digit = '1'; digit <= '9'; digit++)
+	  for(digit = '1'; digit <= '9'; digit++) //Check through each digit.
 	    {
 	      if(make_move(position, digit, board))
 		{
