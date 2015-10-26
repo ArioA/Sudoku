@@ -116,7 +116,6 @@ int main() {
     display_board(board);
   } else 
     cout << "A solution cannot be found for board:" << endl;
-  display_board(board);
   cout << endl;
 
   load_board("mystery3.dat", board);
@@ -126,12 +125,11 @@ int main() {
   } else 
     cout << "A solution cannot be found." << endl;
   cout << endl;
-  /*
-	// write more tests
+
 
   cout << "====================== Question 5 ======================" << endl << endl;
 
-	// write more tests
-	*/
+  cout << "See findings.txt file for my conclusion." << endl << endl;
+
   return 0;
 }
