@@ -7,7 +7,10 @@ contains the "hard" board.
 I believe that mystery1.dat contains the "extremely hard" board
 because  when I ran my executable file, I found that there was a
 slight pause after the program had successfully loaded the mystery1.dat
-file. To me, this indicates that the computer is having to explore
+file. This observation is backed up by the fact that it took the
+computer roughly 1 second to solve the puzzle, compared to several
+hundredths of a second for others.
+To me, this indicates that the computer is having to explore
 more possible combinations of valid moves, before finding the correct
 solution. Hence, the board is more computationally demanding and
 therefore can be deemed to be more difficult than any of the other
@@ -21,6 +24,6 @@ orignial mystery2.dat board. This implies that the is_complete flag
 was not triggered and all searches ended in incorrect outcomes.
 
 Finally, mystery3.dat contains the "hard" puzzle because the program
-took (noticeably) less time to find a solution than for
-mystery1.dat. So, by elimination, and reasons explained in the
+took several hundredths of a second to find a solution as opposed to a
+whole second for mystery1.dat. So, by elimination, and reasons explained in the
 second paragraph, I believe that mystery3.dat contains the "hard" puzzle.

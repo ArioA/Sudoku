@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstdio>
 #include "sudoku.h"
+#include<ctime>
 
 using namespace std;
 
@@ -53,7 +54,7 @@ int main() {
   if (!make_move("I8", '1', board)) 
     cout << "NOT ";
   cout << "a valid move. The board is:" << endl;
-  //  display_board(board);
+  display_board(board);
 
 
   //Testing for deliberately invalid moves.
@@ -137,6 +138,9 @@ int main() {
   cout << endl;
 
   cout << "====================== Question 4 ======================" << endl << endl;
+
+  clock_t time_taken;
+  
  
 //Testing to see if boards are solvable. Should print either complete or 
 //original board if board is solvable or not respectively.
@@ -145,8 +149,14 @@ int main() {
 
   load_board("easy.dat", board); 
 
+  time_taken = clock();
+
   if (solve_board(board)) {
-    cout << "The 'easy' board has a solution:" << endl;
+
+    time_taken = clock() - time_taken;
+    cout << "The 'easy' board took "<< time_taken << " microseconds\n"
+         << "and has a solution:" << endl;
+
   } else 
     cout << "A solution cannot be found for board:" << endl;
 
@@ -157,8 +167,14 @@ int main() {
 
   load_board("medium.dat", board); 
 
+  time_taken = clock();
+
   if (solve_board(board)) {
-    cout << "The 'medium' board has a solution:" << endl;
+
+    time_taken = clock() - time_taken;
+    cout << "The 'medium' board took "<< time_taken << " microseconds\n"
+         << "and has a solution:" << endl;
+
   } else 
     cout << "A solution cannot be found for board:" << endl;
 
@@ -169,8 +185,14 @@ int main() {
 
   load_board("mystery1.dat", board);
 
+  time_taken = clock();
+
   if (solve_board(board)) {
-    cout << "The 'mystery1' board has a solution:" << endl;
+
+    time_taken = clock() - time_taken;
+    cout << "The 'mystery1' board took "<< time_taken << " microseconds\n"
+         << "and has a solution:" << endl;
+
   } else 
     cout << "A solution cannot be found for board:" << endl;
 
@@ -181,8 +203,14 @@ int main() {
 
   load_board("mystery2.dat", board);
 
+  time_taken = clock();
+
   if (solve_board(board)) {
-    cout << "The 'mystery2' board has a solution:" << endl;
+
+    time_taken = clock() - time_taken;
+    cout << "The 'mystery2' board took "<< time_taken << " microseconds\n"
+         << "and has a solution:" << endl;
+
   } else 
     cout << "A solution cannot be found for board:" << endl;
 
@@ -193,8 +221,14 @@ int main() {
 
   load_board("mystery3.dat", board);
 
+  time_taken = clock();
+
   if (solve_board(board)) {
-    cout << "The 'mystery3' board has a solution:" << endl;
+
+    time_taken = clock() - time_taken;
+    cout << "The 'mystery3' board took "<< time_taken << " microseconds\n"
+         << "and has a solution:" << endl;
+
   } else 
     cout << "A solution cannot be found for board:" << endl;
 
